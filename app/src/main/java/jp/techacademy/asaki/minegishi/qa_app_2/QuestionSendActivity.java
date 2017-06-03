@@ -169,8 +169,8 @@ public class QuestionSendActivity extends AppCompatActivity implements View.OnCl
                     uri = data.getData();
                 }
 
-                mPDFText.setEnabled(false);
-                mPDFText.setFocusable(false);
+                //mPDFText.setEnabled(false);
+                //mPDFText.setFocusable(false);
 
                 fileName = RandomStringUtils.randomAlphanumeric(20);
 
