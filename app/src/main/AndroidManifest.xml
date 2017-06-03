@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="jp.techacademy.asaki.minegishi.qa_app_2">
+
+    <!-- Android 上でインターネットに接続するためのパーミッション -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 投稿する際写真を撮影して端末に保存するためのパーミッション -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:hardwareAccelerated="true"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".SettingActivity" />
+        <activity android:name=".QuestionSendActivity" />
+        <activity android:name=".QuestionSendActivity2" />
+        <activity android:name=".QuestionDetailActivity" />
+        <activity android:name=".AnswerSendActivity" />
+    </application>
+
+</manifest>

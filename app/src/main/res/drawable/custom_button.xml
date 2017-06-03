@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/btn_pressed"
+        android:state_pressed="true" />
+    <item android:drawable="@drawable/btn" />
+</selector>
+
+    <!--ボタンの状態に応じて背景が変わるようにするファイル-->
+    <!--android:state_pressed="true"の要素には、ボタンが押下されたときに設定する画像、
+        android:state_focused="true"の要素には、ボタンがフォーカスされたときに設定する画像-->

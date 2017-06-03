@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="8dp"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
+    android:paddingTop="8dp"
+    tools:context=".QuestionSendActivity2">
+
+    <ScrollView android:id="@+id/ScrollView01"
+        android:layout_width="fill_parent" android:layout_height="fill_parent">
+
+        <RelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="投稿"
+                android:textColor="@color/colorButtonText"
+                android:background="@drawable/custom_button"
+                android:id="@+id/sendButton"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="5dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="タイトル"
+                android:id="@+id/titleTextView"
+                android:layout_below="@+id/sendButton"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="20dp"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/titleText"
+                android:gravity="top"
+                android:inputType="text"
+                android:layout_below="@+id/titleTextView"
+                android:layout_alignParentStart="true"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="トップ画像"
+                android:id="@+id/textView2"
+                android:layout_below="@+id/titleText"
+                android:layout_alignParentStart="true"/>
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/imageView"
+                android:layout_below="@+id/textView2"
+                android:background="#d3d3d3"
+                android:layout_centerHorizontal="true"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Youtubeの動画ID"
+                android:id="@+id/videotextView"
+                android:layout_below="@+id/imageView"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="20dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="（https://www.youtube.com/watch?v= 動画ID）"
+                android:id="@+id/video2textView"
+                android:layout_below="@+id/videotextView"
+                android:layout_alignParentStart="true" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/videoText"
+                android:inputType="textMultiLine"
+                android:hint="動画IDを入力"
+                android:maxLines="10"
+                android:gravity="top"
+                android:layout_below="@+id/video2textView"
+                android:layout_alignParentStart="true"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="説明"
+                android:id="@+id/textView"
+                android:layout_below="@+id/videoText"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="10dp"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/bodyText"
+                android:inputType="textMultiLine"
+                android:maxLines="10"
+                android:gravity="top"
+                android:layout_below="@+id/textView"
+                android:layout_alignParentStart="true"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="参考URL"
+                android:id="@+id/urltextView"
+                android:layout_below="@+id/bodyText"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="10dp"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/linkEditText"
+                android:inputType="textMultiLine"
+                android:maxLines="10"
+                android:gravity="top"
+                android:hint="参考URLの説明"
+                android:layout_below="@+id/urltextView"
+                android:layout_alignParentStart="true"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/urlEditText"
+                android:inputType="textMultiLine"
+                android:maxLines="10"
+                android:gravity="top"
+                android:hint="URL"
+                android:layout_below="@+id/linkEditText"
+                android:layout_alignParentStart="true"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ファイルのアップロード（PDF、音楽ファイルなど）"
+                android:id="@+id/PDFtextView"
+                android:layout_below="@+id/urlEditText"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="10dp"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/PDFEditText"
+                android:inputType="textMultiLine"
+                android:maxLines="10"
+                android:gravity="top"
+                android:hint="ファイルの説明"
+                android:layout_below="@+id/PDFtextView"
+                android:layout_alignParentStart="true"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ファイルをアップロード"
+                android:textColor="@color/colorButtonText"
+                android:background="@drawable/custom_button"
+                android:id="@+id/PDFButton"
+                android:layout_below="@+id/PDFEditText"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="5dp"/>
+
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>
