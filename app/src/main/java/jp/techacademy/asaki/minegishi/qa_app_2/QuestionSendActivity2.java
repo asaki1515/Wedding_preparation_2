@@ -89,7 +89,7 @@ public class QuestionSendActivity2 extends AppCompatActivity implements View.OnC
         mGenre = extras.getInt("genre");
 
         // UIの準備
-        setTitle("動画紹介作成");
+        setTitle("動画紹介投稿");
 
         mTitleText = (EditText) findViewById(R.id.titleText);
         mBodyText = (EditText) findViewById(R.id.bodyText);

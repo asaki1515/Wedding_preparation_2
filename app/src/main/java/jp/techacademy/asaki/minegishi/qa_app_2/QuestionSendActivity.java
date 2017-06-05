@@ -88,7 +88,7 @@ public class QuestionSendActivity extends AppCompatActivity implements View.OnCl
         mGenre = extras.getInt("genre");
 
         // UIの準備
-        setTitle("作り方作成");
+        setTitle("作り方投稿");
 
         mTitleText = (EditText) findViewById(R.id.titleText);
         mBodyText = (EditText) findViewById(R.id.bodyText);
