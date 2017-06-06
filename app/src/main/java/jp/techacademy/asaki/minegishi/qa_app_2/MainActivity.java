@@ -28,7 +28,6 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Random;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -41,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
 
     private DatabaseReference mDatabaseReference;
     private DatabaseReference mGenreRef;
-    private DatabaseReference mFavoriteGenreRef;
     private DatabaseReference mFavoriteRef;
     private DatabaseReference mAllRef;
     private ListView mListView;
@@ -93,10 +91,10 @@ public class MainActivity extends AppCompatActivity {
     };
 
 
-    // 質問データに変更があった時に受け取るリスナー
+    // 投稿データに変更があった時に受け取るリスナー
     private ChildEventListener mEventListener = new ChildEventListener() {
         @Override
-        // 要素（質問）が追加されたとき呼ばれるメソッド
+        // 要素が追加されたとき呼ばれるメソッド
         public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
             // 追加されたデータをmapに取得
@@ -140,15 +138,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        // 要素（質問）に変化があった時受けるリスナー
-        // ここでは質問に対して回答が投稿された時に呼ばれる
+        // 要素に変化があった時受けるリスナー
         public void onChildChanged(DataSnapshot dataSnapshot, String s) {
 
             HashMap map = (HashMap) dataSnapshot.getValue();
             // 変更があったQuestionを探す
             for (Question question: mQuestionArrayList) {
 
-                // 投稿された質問のUIDがFirebaseから取得した質問のUIDと一緒なら
+                // 投稿のUIDがFirebaseから取得した投稿のUIDと一緒なら
                 if (dataSnapshot.getKey().equals(question.getQuestionUid())) {
 
                     // このアプリで変更がある可能性があるのは回答(Answer)のみ
@@ -195,6 +192,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    // カテゴリー１の投稿に変化があった時に呼ばれるリスナー
    private ChildEventListener mAllEventListener = new ChildEventListener() {
         @Override
         public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -296,6 +294,7 @@ public class MainActivity extends AppCompatActivity {
    };
 
 
+    // カテゴリー２の投稿に変化があった時に呼ばれるリスナー
     private ChildEventListener mAllEventListener2 = new ChildEventListener() {
         @Override
         public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -397,6 +396,7 @@ public class MainActivity extends AppCompatActivity {
     };
 
 
+    // カテゴリー３の投稿に変化があった時に呼ばれるリスナー
     private ChildEventListener mAllEventListener3 = new ChildEventListener() {
         @Override
         public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -497,6 +497,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    // カテゴリー４の投稿に変化があった時に呼ばれるリスナー
     private ChildEventListener mAllEventListener4 = new ChildEventListener() {
         @Override
         public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -624,15 +625,15 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                 } else {
                     // ジャンルを渡して質問作成画面を起動する
-                    if (mGenre == 1 || mGenre == 2) {///---///
+                    if (mGenre == 1 || mGenre == 2) {
                         Intent intent = new Intent(getApplicationContext(), QuestionSendActivity.class);
                         intent.putExtra("genre", mGenre);
                         startActivity(intent);
-                    }else if (mGenre == 3 || mGenre == 4){///---///
+                    }else if (mGenre == 3 || mGenre == 4){
                         Intent intent = new Intent(getApplicationContext(), QuestionSendActivity2.class);
                         intent.putExtra("genre", mGenre);
                         startActivity(intent);
-                    }///---///
+                    }
                 }
             }
         });
@@ -714,7 +715,7 @@ public class MainActivity extends AppCompatActivity {
                     mGenreRef.removeEventListener(mEventListener);
                 }
 
-                if (mGenre != 5) {//
+                if (mGenre != 5) {
                     mGenreRef = mDatabaseReference.child(Const.ContentsPATH).child(String.valueOf(mGenre));
                     mGenreRef.addChildEventListener(mEventListener);
 
@@ -729,7 +730,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
 
-                    // 投稿が消された時、他人のフェイバレットを消したかったが消せなかった
+                    // 投稿が消された時、他人のお気に入りを消したかったが消せなかった
                    /* int count = 1;
                     int size = mAllArrayList.size();
 
@@ -799,19 +800,6 @@ public class MainActivity extends AppCompatActivity {
         // 表示を更新するために、アダプターにデータが変更されたことを知らせる
         // ここではデータ更新は行なっていないが、念のためコーディング
         mAdapter.notifyDataSetChanged();
-
-        // ログインされていたら、Firebaseとリスナー設定
-       /*if (user != null) {
-            mFavoriteRef = mDatabaseReference.child(Const.FavoritePATH).child(user.getUid());
-            mFavoriteRef.addChildEventListener(mFavoriteEventListener);
-        }*/
-
-        // 質問のリストをクリアしてから再度Adapterにセットし、AdapterをListViewにセットし直す
-        /*mAllArrayList.clear();
-        // アダプターにmQuestionArrayList（データ）をセットする
-        mAdapter.setQuestionArrayList(mAllArrayList);
-        // 質問のmListView用のアダプタに渡す
-        mListView.setAdapter(mAdapter);*/
 
 
         for (count = 1; count < 5; count++) {

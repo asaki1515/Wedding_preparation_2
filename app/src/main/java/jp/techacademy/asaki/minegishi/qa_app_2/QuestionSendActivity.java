@@ -21,13 +21,11 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -56,23 +54,23 @@ public class QuestionSendActivity extends AppCompatActivity implements View.OnCl
     private ProgressDialog mProgress;
     private EditText mTitleText;
     private EditText mBodyText;
-    private EditText mLink;///////
-    private EditText mURLText;////////
-    private EditText mPDFText;//////
+    private EditText mLink;
+    private EditText mURLText;
+    private EditText mPDFText;
     private ImageView mImageView;
     private Button mSendButton;
-    private Button mPDFButton;//----
+    private Button mPDFButton;
 
     private int mGenre;
     private int mFileCheck = 0;
     private String mFile = "";
     private String fileName;
     private Uri mPictureUri;
-    //////
+
     private FirebaseStorage storage;
     private StorageReference storageRef;
-    private StorageReference riversRef;//////
-    /////
+    private StorageReference riversRef;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,10 +78,6 @@ public class QuestionSendActivity extends AppCompatActivity implements View.OnCl
         setContentView(R.layout.activity_question_send);
 
         // 渡ってきたジャンルの番号を保持する
-
-        // Bundle: オブジェクトの入れ物
-        //Intent のインスタンスは内部的に Bundle を持っており、その内部の Bundle に対し値を設定しているだけ
-        // Intent#getExtras()メソッドでBundleを受け取り、そのBundle#getxxメソッドでデータを受け取る
         Bundle extras = getIntent().getExtras();
         mGenre = extras.getInt("genre");
 
@@ -92,15 +86,15 @@ public class QuestionSendActivity extends AppCompatActivity implements View.OnCl
 
         mTitleText = (EditText) findViewById(R.id.titleText);
         mBodyText = (EditText) findViewById(R.id.bodyText);
-        mLink = (EditText) findViewById(R.id.linkEditText);/////
-        mURLText = (EditText) findViewById(R.id.urlEditText);//////
-        mPDFText = (EditText) findViewById(R.id.PDFEditText);//----
+        mLink = (EditText) findViewById(R.id.linkEditText);
+        mURLText = (EditText) findViewById(R.id.urlEditText);
+        mPDFText = (EditText) findViewById(R.id.PDFEditText);
 
         mSendButton = (Button) findViewById(R.id.sendButton);
         mSendButton.setOnClickListener(this);
 
-        mPDFButton = (Button) findViewById(R.id.PDFButton);//----
-        mPDFButton.setOnClickListener(this);//----
+        mPDFButton = (Button) findViewById(R.id.PDFButton);
+        mPDFButton.setOnClickListener(this);
 
 
         mImageView = (ImageView) findViewById(R.id.imageView);
@@ -109,10 +103,8 @@ public class QuestionSendActivity extends AppCompatActivity implements View.OnCl
         mProgress = new ProgressDialog(this);
         mProgress.setMessage("投稿中...");
 
-        /////
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReferenceFromUrl("gs://qaapp4-4bf13.appspot.com");
-        /////
 
     }
 
@@ -169,13 +161,11 @@ public class QuestionSendActivity extends AppCompatActivity implements View.OnCl
                     uri = data.getData();
                 }
 
-                //mPDFText.setEnabled(false);
-                //mPDFText.setFocusable(false);
 
                 fileName = RandomStringUtils.randomAlphanumeric(20);
 
-                /////
-                riversRef = storageRef.child(fileName);/////
+
+                riversRef = storageRef.child(fileName);
                 UploadTask uploadTask = riversRef.putFile(uri);
                 mFileCheck = 1;
 
@@ -192,10 +182,8 @@ public class QuestionSendActivity extends AppCompatActivity implements View.OnCl
                         //Uri downloadUrl = taskSnapshot.getDownloadUrl();
                     }
                 });
-                /////
-
             }
-        }//----
+        }
     }
 
     @Override
@@ -266,10 +254,10 @@ public class QuestionSendActivity extends AppCompatActivity implements View.OnCl
             data.put("body", body);
             data.put("name", name);
             data.put("link", link);
-            data.put("url", url);//////
-            data.put("fileName", fileName);/////
+            data.put("url", url);
+            data.put("fileName", fileName);
             data.put("file", mFile);
-            data.put("video", "");////----////
+            data.put("video", "");
 
             // 添付画像を取得する
             BitmapDrawable drawable = (BitmapDrawable) mImageView.getDrawable();
@@ -300,7 +288,7 @@ public class QuestionSendActivity extends AppCompatActivity implements View.OnCl
             genreRef.push().setValue(data, this);
             mProgress.show();
 
-        }else if (v==mPDFButton){//----
+        }else if (v==mPDFButton){
 
             mFile = mPDFText.getText().toString();
             if(mFile.length() == 0){
@@ -324,7 +312,7 @@ public class QuestionSendActivity extends AppCompatActivity implements View.OnCl
                     fileUpload();
                 }
             }
-        }//----
+        }
     }
 
     @Override

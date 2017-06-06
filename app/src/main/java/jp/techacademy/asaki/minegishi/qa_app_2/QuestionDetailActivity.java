@@ -1,15 +1,10 @@
 package jp.techacademy.asaki.minegishi.qa_app_2;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Base64;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,13 +18,11 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
+
 
 public class QuestionDetailActivity extends AppCompatActivity {
 
@@ -37,19 +30,16 @@ public class QuestionDetailActivity extends AppCompatActivity {
     private ListView mListView;
     private Button mFavoriteButton;
     private Question mQuestion;
-    //////
     private ArrayList<Favorite> mFavorite;
     private int Flag = 0;
-    //////
+
     private QuestionDetailListAdapter mAdapter;
-    private QuestionDetailListAdapter2 mAdapter2;///---///
+    private QuestionDetailListAdapter2 mAdapter2;
 
     private DatabaseReference mAnswerRef;
     private DatabaseReference FavoriteRef;
-
-    /////
     private DatabaseReference QuestionRef;
-    ////
+
 
     private ChildEventListener mEventListener = new ChildEventListener() {
         @Override
@@ -77,11 +67,12 @@ public class QuestionDetailActivity extends AppCompatActivity {
             // 回答データを質問データに追加
             mQuestion.getAnswers().add(answer);
 
-            if (mQuestion.getGenre() == 1 || mQuestion.getGenre() == 2) {///---///
+            // ジャンルによって分岐
+            if (mQuestion.getGenre() == 1 || mQuestion.getGenre() == 2) {
                 mAdapter.notifyDataSetChanged();
-            } else if (mQuestion.getGenre() == 3 || mQuestion.getGenre() == 4) {///---///
+            } else if (mQuestion.getGenre() == 3 || mQuestion.getGenre() == 4) {
                 mAdapter2.notifyDataSetChanged();
-            }///---///
+            }
         }
 
         @Override
@@ -116,20 +107,20 @@ public class QuestionDetailActivity extends AppCompatActivity {
         mFavorite = (ArrayList<Favorite>) extras.get("favorite");
 
         setTitle(mQuestion.getTitle());
-        //setTitle("");/////////
 
         // ListViewの準備
         mListView = (ListView) findViewById(R.id.listView);
 
-        if (mQuestion.getGenre() == 1 || mQuestion.getGenre() == 2) {///---///
+        // ジャンルによって分岐
+        if (mQuestion.getGenre() == 1 || mQuestion.getGenre() == 2) {
             mAdapter = new QuestionDetailListAdapter(this, mQuestion);
             mListView.setAdapter(mAdapter);
             mAdapter.notifyDataSetChanged();
-        } else if (mQuestion.getGenre() == 3 || mQuestion.getGenre() == 4) {///---///
+        } else if (mQuestion.getGenre() == 3 || mQuestion.getGenre() == 4) {
             mAdapter2 = new QuestionDetailListAdapter2(this, mQuestion);
             mListView.setAdapter(mAdapter2);
             mAdapter2.notifyDataSetChanged();
-        }///---///
+        }
 
         // buttonの準備
         mFavoriteButton = (Button) findViewById(R.id.favorite);
@@ -213,10 +204,9 @@ public class QuestionDetailActivity extends AppCompatActivity {
         mAnswerRef.addChildEventListener(mEventListener);
     }
 
-    ///////
+    // 削除ボタン
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_remove, menu);
         return true;
     }
@@ -257,5 +247,4 @@ public class QuestionDetailActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-    ////////
 }

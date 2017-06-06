@@ -4,25 +4,19 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import java.io.File;
-import java.io.IOException;
 
 public class QuestionDetailListAdapter extends BaseAdapter {
     private final static int TYPE_QUESTION = 0;
@@ -31,8 +25,7 @@ public class QuestionDetailListAdapter extends BaseAdapter {
     private LayoutInflater mLayoutInflater = null;
     private Question mQustion;
 
-    private TextView filelinkTextView;//-----
-    //private Button mfileButton;//-----
+    private TextView filelinkTextView;
 
     public QuestionDetailListAdapter(Context context, Question question) {
         mLayoutInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -76,16 +69,13 @@ public class QuestionDetailListAdapter extends BaseAdapter {
             if (convertView == null) {
                 convertView = mLayoutInflater.inflate(R.layout.list_question_detail, parent, false);
             }
-            //String title = mQustion.getTitle();//////
             String body = mQustion.getBody();
             String name = mQustion.getName();
-            String link = mQustion.getLink();////
-            String url = mQustion.getUrl();/////
-            String fileName = mQustion.getFileName();//----
+            String link = mQustion.getLink();
+            String url = mQustion.getUrl();
+            String fileName = mQustion.getFileName();
             String file = mQustion.getFile();
 
-            //TextView titleTextView = (TextView) convertView.findViewById(R.id.titleTextView);////
-            //titleTextView.setText(title);/////
 
             TextView bodyTextView = (TextView) convertView.findViewById(R.id.bodyTextView);
             bodyTextView.setText(body);
@@ -93,13 +83,14 @@ public class QuestionDetailListAdapter extends BaseAdapter {
             TextView nameTextView = (TextView) convertView.findViewById(R.id.nameTextView);
             nameTextView.setText(name);
 
-            /////
+
             TextView fileTextView = (TextView) convertView.findViewById(R.id.fileTextView2);
             filelinkTextView = (TextView) convertView.findViewById(R.id.filelinkTextView);
 
             if (file.length() != 0) {
                 fileTextView.setText(file);
 
+                // ストレージの設定
                 FirebaseStorage storage = FirebaseStorage.getInstance();
                 StorageReference storageRef = storage.getReferenceFromUrl("gs://qaapp4-4bf13.appspot.com");
 
@@ -120,11 +111,11 @@ public class QuestionDetailListAdapter extends BaseAdapter {
             }
 
 
-            TextView urlTextView = (TextView) convertView.findViewById(R.id.urlTextView);//////
-            TextView linkTextView = (TextView) convertView.findViewById(R.id.TextView2);//////
+            TextView urlTextView = (TextView) convertView.findViewById(R.id.urlTextView);
+            TextView linkTextView = (TextView) convertView.findViewById(R.id.TextView2);
             if (url.length() != 0) {
-                linkTextView.setText(link);/////
-                urlTextView.setText(url);//////
+                linkTextView.setText(link);
+                urlTextView.setText(url);
             }else {
                 urlTextView.setText("なし");
             }
@@ -134,7 +125,7 @@ public class QuestionDetailListAdapter extends BaseAdapter {
                 ImageView imageView = (ImageView) convertView.findViewById(R.id.imageView);
                 imageView.setImageBitmap(image);
 
-                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);////
+                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             }
         } else {
             if (convertView == null) {

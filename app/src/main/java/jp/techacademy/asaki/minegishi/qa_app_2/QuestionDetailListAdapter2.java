@@ -1,40 +1,27 @@
 package jp.techacademy.asaki.minegishi.qa_app_2;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
-import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
-import android.webkit.WebStorage;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 
-
-import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import java.io.File;
-import java.io.IOException;
 
 public class QuestionDetailListAdapter2 extends BaseAdapter{
     private final static int TYPE_QUESTION = 0;
@@ -43,14 +30,13 @@ public class QuestionDetailListAdapter2 extends BaseAdapter{
     private LayoutInflater mLayoutInflater = null;
     private Question mQustion;
 
-    private TextView filelinkTextView;//-----
+    private TextView filelinkTextView;
 
     private WebView webView;
     private WebChromeClient.CustomViewCallback customViewCallback;
     private FrameLayout customViewContainer;
     private View mCustomView;
 
-    //private Button mfileButton;//-----
 
     public QuestionDetailListAdapter2(Context context, Question question) {
         mLayoutInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -96,18 +82,15 @@ public class QuestionDetailListAdapter2 extends BaseAdapter{
             if (convertView == null) {
                 convertView = mLayoutInflater.inflate(R.layout.list_question_detail2, parent, false);
             }
-            //String title = mQustion.getTitle();//////
             String body = mQustion.getBody();
             String name = mQustion.getName();
-            String link = mQustion.getLink();////
-            String url = mQustion.getUrl();/////
-            String fileName = mQustion.getFileName();//----
+            String link = mQustion.getLink();
+            String url = mQustion.getUrl();
+            String fileName = mQustion.getFileName();
             String file = mQustion.getFile();
-            String video = mQustion.getVideo();////----/////
+            String video = mQustion.getVideo();
 
-
-           // TextView titleTextView = (TextView) convertView.findViewById(R.id.titleTextView);////
-            //titleTextView.setText(title);/////
+            // youtube再生
             webView = (WebView) convertView.findViewById(R.id.myWebView);
             WebViewClient mWebViewClient = new WebViewClient();
             //リンクをタップしたときに標準ブラウザを起動させない
@@ -130,7 +113,7 @@ public class QuestionDetailListAdapter2 extends BaseAdapter{
             TextView nameTextView = (TextView) convertView.findViewById(R.id.nameTextView);
             nameTextView.setText(name);
 
-            /////
+
             TextView fileTextView = (TextView) convertView.findViewById(R.id.fileTextView2);
             filelinkTextView = (TextView) convertView.findViewById(R.id.filelinkTextView);
 
@@ -138,6 +121,7 @@ public class QuestionDetailListAdapter2 extends BaseAdapter{
             if (file.length() != 0) {
                 fileTextView.setText(file);
 
+                // ストレージ設定
                 FirebaseStorage storage = FirebaseStorage.getInstance();
                 StorageReference storageRef = storage.getReferenceFromUrl("gs://qaapp4-4bf13.appspot.com");
 
@@ -158,23 +142,14 @@ public class QuestionDetailListAdapter2 extends BaseAdapter{
             }
 
 
-            TextView urlTextView = (TextView) convertView.findViewById(R.id.urlTextView);//////
-            TextView linkTextView = (TextView) convertView.findViewById(R.id.TextView2);//////
+            TextView urlTextView = (TextView) convertView.findViewById(R.id.urlTextView);
+            TextView linkTextView = (TextView) convertView.findViewById(R.id.TextView2);
             if (url.length() != 0) {
-                linkTextView.setText(link);/////
-                urlTextView.setText(url);//////
+                linkTextView.setText(link);
+                urlTextView.setText(url);
             }else {
                 urlTextView.setText("なし");
             }
-
-           /* byte[] bytes = mQustion.getImageBytes();
-            if (bytes.length != 0) {
-                Bitmap image = BitmapFactory.decodeByteArray(bytes, 0, bytes.length).copy(Bitmap.Config.ARGB_8888, true);
-                ImageView imageView = (ImageView) convertView.findViewById(R.id.imageView);
-                imageView.setImageBitmap(image);
-
-                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);////
-            }*/
 
         } else {
             if (convertView == null) {
@@ -195,7 +170,6 @@ public class QuestionDetailListAdapter2 extends BaseAdapter{
         return convertView;
     }
 
-    /////
     class myWebChromeClient extends WebChromeClient {
 
         @Override
@@ -232,5 +206,4 @@ public class QuestionDetailListAdapter2 extends BaseAdapter{
             customViewCallback = callback;
         }
     }
-    /////
 }

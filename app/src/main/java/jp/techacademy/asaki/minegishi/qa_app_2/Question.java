@@ -6,15 +6,15 @@ import java.util.ArrayList;
 // Firebaseから取得した質問のデータを保持するモデルクラス
 public class Question implements Serializable {
     private String mTitle;  // Firebaseから取得したタイトル
-    private String mBody;   // Firebaseから取得した質問本文
-    private String mName;   // Firebaseから取得した質問者の名前
-    private String mUid;    // Firebaseから取得した質問者のUID
-    private String mQuestionUid;   //Firebaseから取得した質問のUID
-    private String mUrl;////////
-    private String mLink;/////
-    private String mFileName;//----
-    private String mFile;
-    private String mVideo;///----///
+    private String mBody;   // Firebaseから取得した投稿本文
+    private String mName;   // Firebaseから取得した投稿者の名前
+    private String mUid;    // Firebaseから取得した投稿者のUID
+    private String mQuestionUid;   //Firebaseから取得した投稿のUID
+    private String mUrl;   //Firebaseから取得した投稿内の参考URL
+    private String mLink;   //Firebaseから取得した投稿内の参考URLの説明
+    private String mFileName;   //Firebaseから取得した投稿内の参考ファイルの説明
+    private String mFile;   //Firebaseから取得した投稿内の参考ファイル
+    private String mVideo;  //Firebaseから取得した投稿内の動画
 
     private int mGenre;   // 質問のジャンル
     private byte[] mBitmapArray;   // Firebaseから取得した画像をbyte型の配列にしたもの
